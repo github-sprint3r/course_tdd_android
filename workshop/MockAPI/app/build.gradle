@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "workshop.mockexternalapi"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("keystores/release.keystore")
+            storePassword "your-keystore-password"
+            keyAlias "your-alias"
+            keyPassword "your-alias-password"
+        }
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+    }
+
+    productFlavors {
+        def COURSE_URL = "COURSE_URL"
+
+        dev {
+            applicationId "workshop.mockexternalapi.dev"
+            buildConfigField "String", COURSE_URL, '"http://10.0.3.2:8888/api-2.0/courses"'
+        }
+
+        qa {
+            applicationId "workshop.mockexternalapi.qa"
+            buildConfigField "String", COURSE_URL, '"https://www.udemy.com/api-2.0/courses"'
+        }
+
+        prod {
+            applicationId "workshop.mockexternalapi"
+            buildConfigField "String", COURSE_URL, '"https://www.udemy.com/api-2.0/courses"'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.0'
+
+    compile 'com.android.support:cardview-v7:22.0.+'
+    compile 'com.android.support:recyclerview-v7:22.0.+'
+
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+
+    compile 'com.google.code.gson:gson:2.2.4'
+}
