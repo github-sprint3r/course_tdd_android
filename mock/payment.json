@@ -1,0 +1,30 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/api/payment"
+    },
+    "response": {
+        "status": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "jsonBody": 
+        {
+            "results" : [
+                {
+                    "title" : "VISA",
+                    "price" : "100"
+                },
+                 {
+                    "title" : "MASTER",
+                    "price" : "200"
+                },
+                {
+                    "title" : "CounterService",
+                    "price" : "300"
+                }
+            ]
+        }
+    }
+}
+
